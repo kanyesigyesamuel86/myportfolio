@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Samuel Kanyesigye {% endblock %}
+
+{% block content %}
+    <section id="profile" class="profile">
+        <div class="profile-content">
+            <h1>Samuel Kanyesigye</h1>
+            <p>Computer Engineering Student</p>
+            <a href="{% url 'profile_1' %}">Update profile</a>
+            
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <p>
+                    <strong>Contact:</strong>
+                    <a href="tel:+256760410334">+256760410334</a> / <a href="tel:+256752425209">++256752425209</a>
+                </p>
+                <p>
+                    <strong>Email:</strong>
+                    <a href="mailto:kanyesigyesam@gmail.com">kanyesigyesam@gmail.com</a>
+                </p>
+                <p>
+                    <strong>GitHub:</strong>
+                    <a href="https://github.com/kanyesigyesam" target="_blank">github.com/kanyesigyesam</a>
+                </p>
+            </div>
+
+            <!-- Overview -->
+            <div class="overview">
+                <p>
+                    Highly motivated and detail-oriented student with excellent communication and interpersonal skills. 
+                    Proven track record of effective teamwork. Eager to apply knowledge and gain practical experience in a dynamic and fast-paced work environment.
+                </p>
+            </div>
+            <br>
+            <br>
+
+
+            <!-- Education -->
+            <div class="education">
+                <h2>Education</h2>
+                <p>
+                    <strong>Makerere University</strong><br>
+                    BSc Computer Engineering - Year 4<br>
+                    CGPA: 4.89 (Graduation Date: Jan 2025)
+                </p>
+            </div>
+
+            <!-- Experience -->
+            <div class="experience">
+                <h2>Experience</h2>
+                <p>
+                    <strong>Industrial Trainee, RENU</strong><br>
+                    June 2023 - August 2023<br>
+                    - Developed and performed penetration testing on a web
+                    application that monitors the online reputation of IP addresses
+                    using Django, HTML, CSS and JavaScript and deployed it. <br>
+                    - Installed windows server 2019 and setup active directory. <br>
+                    - Installed Ubuntu server 2018 LTS and setup docker on it. <br>
+                    - Setup and configured Network and Device monitoring tools,
+                    that is, Nagios, Cacti and LibreNMS. <br>  
+                    - Configured Routing protocols of OSPF, IS-IS and Gateway <br>
+                    - Routing Protocols and VLANs. <br>
+                    - Configured point-2-point microwave links. <br>
+                    - Configured a DNS server using BIND9. <br>
+                </p>
+                <!-- Add other experiences -->
+            </div>
+
+            <!-- Skills -->
+            <div class="skills">
+                <h2>Skills</h2>
+                <p>
+                    Python, C, Linux, Web Development, MATLAB
+                </p>
+            </div>
+
+            <!-- Achievements -->
+            <div class="achievements">
+                <h2>Achievements</h2>
+                <p>
+                    - MikroTik Certified Network Associate (MTCNA)<br>
+                    - ISC2 Certified in Cybersecurity (ISC2 CC)<br>
+                    - Google Cybersecurity Professional Certificate
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
