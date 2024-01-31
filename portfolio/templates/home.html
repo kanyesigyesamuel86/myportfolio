@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Web Developer</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Hello, I'm Samuel Kanyesigye</h1>
+        <p>A passionate computer Engineer creating innovative solutions</p>
+        <a href="#portfolio" class="btn">Explore My Work</a>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="about-content">
+        <h2>About Me</h2>
+        <p>Welcome to my portfolio! I'm a web developer with a strong background in...</p>
+        <a href="#portfolio" class="btn">View My Projects</a>
+    </div>
+</section>
+
+<section id="portfolio" class="portfolio">
+    <div class="portfolio-content">
+        <h2>Portfolio</h2>
+        <!-- Your project cards go here -->
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="contact-content">
+        <h2>Contact Me</h2>
+        <p>Ready to start a project together or have a question?</p>
+        <a href="#contact-form" class="btn">Get in Touch</a>
+    </div>
+</section>
+
+<section id="contact-form" class="contact-form">
+    <h2>Send me a message</h2>
+    <!-- Your contact form goes here -->
+</section>
+
+<footer>
+    <p>&copy; 2024 Kanyesigye Samuel-. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
+{% endblock %}
