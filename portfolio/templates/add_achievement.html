@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Add Achievement{% endblock %}
+
+{% block content %}
+    <h2>Add Achievements</h2>
+    <form method="post" action="{% url 'add_achievement' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        <a href="{% url 'add_achievement' %}">Add another Achievement</a> 
+      </form>
+          
+    </form>
+{% endblock %}

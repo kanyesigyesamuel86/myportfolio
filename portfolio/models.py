@@ -46,6 +46,7 @@ class Profile(models.Model):
     work_experiences = models.ManyToManyField(WorkExperience)
     skills = models.ManyToManyField(Skill)
     achievements = models.ManyToManyField(Achievement)
+    education = models.ManyToManyField(Education)
 
     def __str__(self):
         return self.full_name

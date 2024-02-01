@@ -11,16 +11,16 @@
 <p>Contact: {{ profile.contact_number_1 }}, {{ profile.contact_number_2 }}</p>
 <p>Email: {{ profile.email }}</p>
 <p>GitHub: <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
-<a href="{% url 'update_profile' %}">Update Profile</a>
-
 <!-- Overview -->
 <div class="overview">
     <p>{{ profile.overview }}</p>
 </div>
+<a href="{% url 'update_profile' %}">Update Profile</a>
 
+<br><br>
 <!-- Work Experiences -->
 <div class="work-experiences">
-    <h3>Work Experiences</h3>
+    <h2>Work Experiences</h2>
     <ul>
         {% for experience in profile.work_experiences.all %}
             <li>
@@ -34,18 +34,22 @@
     </ul>
     <a href="{% url 'add_work_experience' %}">Add Work Experience</a>
 </div>
-            <!-- Education -->
-            <div class="education">
-                <h2>Education</h2>
-                <ul>
-                    {% for edu in profile.education.all %}
-                        <li>
-                            <strong>{{ edu.degree }}</strong> at {{ edu.university }}<br>
-                            Graduated on {{ edu.graduation_date }} with a CGPA of {{ edu.cgpa }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+
+<div class="education">
+    <h2>Education</h2>
+    <ul>
+        {% for item in profile.education.all %}
+            <li>
+                <strong>{{ item.degree }}</strong> at {{ item.university }}<br>
+                {{ item.cgpa }}<br>
+                {{ item.graduation_date }}
+                <br>
+                <a href="{% url 'update_education' pk=item.pk %}">Update</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_education' %}">Add Education</a>
+</div>
 
             <!-- Skills -->
             <div class="skills">
@@ -55,6 +59,7 @@
                         <li>{{ skill.name }}</li>
                     {% endfor %}
                 </ul>
+                <a href="{% url 'add_skill' %}">Add a Skill</a>
             </div>
 
             <!-- Achievements -->
@@ -65,7 +70,9 @@
                         <li>{{ achievement.title }}</li>
                     {% endfor %}
                 </ul>
+                <a href="{% url 'add_achievement'  %}">Add Achievement</a>
+                <p>Kanye</p>
             </div>
-        </div>
+
     </section>
 {% endblock %}
