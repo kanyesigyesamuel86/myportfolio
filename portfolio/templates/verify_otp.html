@@ -1,0 +1,14 @@
+<!-- otp_verification.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Enter OTP</h2>
+  <form method="post" action="{% url 'verify_otp' %}">
+    {% csrf_token %}
+    <input type="hidden" name="username" value="{{ username }}">
+    <p>An OTP has been sent to {{user_email}}</p>
+    <label for="otp">Enter OTP:</label>
+    <input type="text" name="otp" required>
+    <button type="submit">Verify OTP</button>
+  </form>
+{% endblock %}

@@ -1,15 +1,21 @@
-<!-- update_work_experience.html -->
-
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Update Education{% endblock %}
 
 {% block content %}
+
+<div>
     <h2>Update Work Experience</h2>
     <form method="post" action="{% if work_education.pk %}{% url 'update_education' pk=work_education_instance.pk %}{% endif %}">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Save</button>
-  </form>
-  
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 {% endblock %}

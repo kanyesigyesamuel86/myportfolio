@@ -1,0 +1,70 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #3498db;
+}
+
+form {
+    margin-top: 20px;
+}
+
+/* Styling for input fields with bottom lines */
+form input {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+}
+
+form button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 8px 16px;
+    background-color: #2ecc71;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* Error message styling */
+.error-message {
+    color: #c03333;
+    margin-top: 10px;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 600px) {
+    .form-container {
+        padding: 10px;
+    }
+}

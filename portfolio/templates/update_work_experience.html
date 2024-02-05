@@ -5,11 +5,31 @@
 {% block title %}Update Work Experience{% endblock %}
 
 {% block content %}
+<style>
+  .error-message {
+    color: #c03333;
+  }
+
+</style>
+
     <h2>Update Work Experience</h2>
+
+    {% if form.errors %}
+    <div class="error-message">
+        <strong>Error:</strong> There were some issues with the form submission. Please correct the errors below.
+        <ul>
+            {% for error in form.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
     <form method="post" action="{% if work_experience_instance.pk %}{% url 'update_work_experience' pk=work_experience_instance.pk %}{% endif %}">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Save</button>
   </form>
-  
+
+
 {% endblock %}

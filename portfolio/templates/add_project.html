@@ -2,15 +2,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Add Skill{% endblock %}
+{% block title %}Add Project{% endblock %}
 <link rel="stylesheet" type="text/css" href="{% static 'form_styles.css' %}">
 
 {% block content %}
-    <h2>Add Skill</h2>
-    <form method="post" action="{% url 'add_skill' %}">
+    <h2>Add Project</h2>
+    <form method="post" action="{% url 'add_project' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <a href="{% url 'add_skill' %}"><button type="submit">Save</button></a> 
+        <a href="{% url 'add_project' %}"><button type="submit">Save</button></a> 
       </form>
       <a href="{% url 'profile_1' %}">Back</a>
           

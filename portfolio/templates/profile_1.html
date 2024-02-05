@@ -5,74 +5,115 @@
 {% block title %}{{ profile.full_name }} - {{ profile.title }}{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        margin: 0;
+    }
 
-<h1>{{ profile.full_name }}</h1>
-<h2>{{ profile.title }}</h2>
-<p>Contact: {{ profile.contact_number_1 }}, {{ profile.contact_number_2 }}</p>
-<p>Email: {{ profile.email }}</p>
-<p>GitHub: <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
-<!-- Overview -->
-<div class="overview">
-    <p>{{ profile.overview }}</p>
-</div>
-<a href="{% url 'update_profile' %}">Update Profile</a>
 
-<br><br>
-<!-- Work Experiences -->
-<div class="work-experiences">
-    <h2>Work Experiences</h2>
-    <ul>
-        {% for experience in profile.work_experiences.all %}
-            <li>
-                <strong>{{ experience.title }}</strong> at {{ experience.company }}<br>
-                {{ experience.start_date }} - {{ experience.end_date|default:"Present" }}<br>
-                {{ experience.description }}
-                <br>
-                <a href="{% url 'update_work_experience' pk=experience.pk %}">Update</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_work_experience' %}">Add Work Experience</a>
-</div>
 
-<div class="education">
-    <h2>Education</h2>
-    <ul>
-        {% for item in profile.education.all %}
-            <li>
-                <strong>{{ item.degree }}</strong> at {{ item.university }}<br>
-                {{ item.cgpa }}<br>
-                {{ item.graduation_date }}
-                <br>
-                <a href="{% url 'update_education' pk=item.pk %}">Update</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_education' %}">Add Education</a>
-</div>
 
-            <!-- Skills -->
-            <div class="skills">
-                <h2>Skills</h2>
-                <ul>
-                    {% for skill in profile.skills.all %}
-                        <li>{{ skill.name }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="{% url 'add_skill' %}">Add a Skill</a>
-            </div>
+   
 
-            <!-- Achievements -->
-            <div class="achievements">
-                <h2>Achievements</h2>
-                <ul>
-                    {% for achievement in profile.achievements.all %}
-                        <li>{{ achievement.title }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="{% url 'add_achievement'  %}">Add Achievement</a>
-                <p>Kanye</p>
-            </div>
 
-    </section>
+</style>
+
+<section class="profile-section">
+    <div class="profile-header">
+        <h1>{{ profile.full_name }}</h1>
+        <h2>{{ profile.title }}</h2>
+        <p>Contact: {{ profile.contact_number_1 }}, {{ profile.contact_number_2 }}</p>
+        <p>Email: {{ profile.email }}</p>
+        <p>GitHub: <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
+        <div class="overview">
+            <p>{{ profile.overview }}</p>
+        </div>
+        <a class="update-profile-link" href="{% url 'update_profile' %}">Update Profile</a>
+        <a href="{% url 'profile_1' %}">View Full Profile</a>
+    </div>
+
+    <!-- Work Experiences -->
+    <div class="section-container work-experiences">
+        <h2>Work Experiences</h2>
+        <ul>
+            {% for experience in profile.work_experiences.all %}
+                <li>
+                    <strong>{{ experience.title }}</strong> at {{ experience.company }}<br>
+                    {{ experience.start_date }} - {{ experience.end_date|default:"Present" }}<br>
+                    {{ experience.description }}
+                    <br>
+                    <a class="update-link" href="{% url 'update_work_experience' pk=experience.pk %}">Update</a>
+                    <a href="{% url 'delete_experience' pk=experience.pk %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="add-link" href="{% url 'add_work_experience' %}">Add Work Experience</a>
+    </div>
+
+    <!-- Education -->
+    <div class="section-container education">
+        <h2>Education</h2>
+        <ul>
+            {% for item in profile.education.all %}
+                <li>
+                    <strong>{{ item.degree }}</strong> at {{ item.university }}<br>
+                    {{ item.cgpa }}<br>
+                    {{ item.graduation_date }}
+                    <br>
+                    <a class="update-link" href="{% url 'update_education' pk=item.pk %}">Update</a>
+                    <a href="{% url 'delete_education' pk=item.pk %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="add-link" href="{% url 'add_education' %}">Add Education</a>
+    </div>
+
+    <!-- Skills -->
+    <div class="section-container skills">
+        <h2>Skills</h2>
+        <ul>
+            {% for skill in profile.skills.all %}
+                <li>{{ skill.name }} <a href="{% url 'delete_skill' pk=skill.pk %}">Delete</a></li>
+            {% endfor %}
+        </ul>
+        <a class="add-link" href="{% url 'add_skill' %}">Add a Skill</a>
+    </div>
+
+    <!-- Achievements -->
+    <div class="section-container achievements">
+        <h2>Achievements</h2>
+        <ul>
+            {% for achievement in profile.achievements.all %}
+                <li>{{ achievement.title }} <a href="{% url 'delete_achievement' pk=achievement.pk %}">Delete</a></li>
+            {% endfor %}
+        </ul>
+        <a class="add-link" href="{% url 'add_achievement'  %}">Add Achievement</a>
+    </div>
+
+    <!-- Projects -->
+    <div class="section-container projects">
+        <h2>Projects</h2>
+        <ul>
+            {% for project in profile.project.all %}
+                <li>{{ project.title }} <br> {{project.description }} <br> <a href="{{project.link }}">{{project.link }}</a><a href="{% url 'delete_project' pk=project.pk %}">Delete</a></li> <br>
+            {% endfor %}
+        </ul>
+        <a class="add-link" href="{% url 'add_project'  %}">Add Project</a>
+    </div>
+
+    <!-- Hobbies -->
+    <div class="section-container hobbies">
+        <h2>Hobbies</h2>
+        <ul>
+            {% for hobby in profile.hobby.all %}
+                <li>{{ hobby.title }} <a href="{% url 'delete_hobby' pk=hobby.pk %}">Delete</a></li>
+            {% endfor %}
+        </ul>
+        <a class="add-link" href="{% url 'add_hobby'  %}">Add Hobby</a>
+    </div>
+</section>
 {% endblock %}
+

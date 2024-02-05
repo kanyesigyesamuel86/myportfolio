@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 
 class WorkExperience(models.Model):
@@ -34,6 +35,16 @@ class Achievement(models.Model):
     def __str__(self):
         return self.title
     
+class Project(models.Model):
+    title = models.CharField(max_length=255)
+    description =models.TextField()
+    link = models.URLField()
+
+class Hobby(models.Model):
+    title = models.CharField(max_length=50)
+
+    
+    
 
 class Profile(models.Model):
     full_name = models.CharField(max_length=255)
@@ -43,10 +54,14 @@ class Profile(models.Model):
     email = models.EmailField()
     github_url = models.URLField()
     overview = models.TextField()
+
     work_experiences = models.ManyToManyField(WorkExperience)
     skills = models.ManyToManyField(Skill)
     achievements = models.ManyToManyField(Achievement)
     education = models.ManyToManyField(Education)
+    project = models.ManyToManyField(Project)
+    hobby = models.ManyToManyField(Hobby)
+    
 
     def __str__(self):
         return self.full_name

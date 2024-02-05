@@ -1,89 +1,202 @@
+<!-- profile.html -->
+
 {% extends 'base.html' %}
 
-{% block title %}Samuel Kanyesigye {% endblock %}
+{% block title %}{{ profile.full_name }} - {{ profile.title }}{% endblock %}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        margin: 0;
+    }
+
+    .profile-section {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+        margin-bottom: 20px;
+    }
+
+    .profile-header h1 {
+        color: #3498db;
+    }
+
+    .profile-header h2 {
+        color: #555;
+    }
+
+    .profile-header p {
+        margin: 5px 0;
+    }
+
+    .overview {
+        margin-top: 15px;
+    }
+
+    .update-profile-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 4px 4px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .section-container {
+        margin-top: 20px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
+    .update-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 4px 4px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .add-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 4px 4px;
+        background-color: #2ecc71;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition effect for color change */
+}
+
+a:hover {
+    color: #31af2c;
+}
+
+    /* Responsive design for smaller screens */
+    @media screen and (max-width: 600px) {
+        .profile-section {
+            padding: 10px;
+        }
+    }
+</style>
+
 
 {% block content %}
-    <section id="profile" class="profile">
-        <div class="profile-content">
-            <h1>Samuel Kanyesigye</h1>
-            <p>Computer Engineering Student</p>
-            <a href="{% url 'profile_1' %}">Update profile</a>
-            
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <p>
-                    <strong>Contact:</strong>
-                    <a href="tel:+256760410334">+256760410334</a> / <a href="tel:+256752425209">++256752425209</a>
-                </p>
-                <p>
-                    <strong>Email:</strong>
-                    <a href="mailto:kanyesigyesam@gmail.com">kanyesigyesam@gmail.com</a>
-                </p>
-                <p>
-                    <strong>GitHub:</strong>
-                    <a href="https://github.com/kanyesigyesam" target="_blank">github.com/kanyesigyesam</a>
-                </p>
-            </div>
 
-            <!-- Overview -->
+<section class="profile-section">
+    <a href="#">Download</a><a href="{% url 'profile' %}"> Edit</a>
+    <div class="profile-header">
+        <h1>{{ profile.full_name }}</h1>
+        <h2>{{ profile.title }}</h2>
+        {% if profile.contact_number_1 %}
+            <p>Contact: {{ profile.contact_number_1 }}, {{ profile.contact_number_2 }}</p>
+        {% endif %}
+        {% if profile.email %}
+            <p>Email: {{ profile.email }}</p>
+        {% endif %}
+        {% if profile.github_url %}
+            <p>GitHub: <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
+        {% endif %}
+        {% if profile.overview %}
             <div class="overview">
-                <p>
-                    Highly motivated and detail-oriented student with excellent communication and interpersonal skills. 
-                    Proven track record of effective teamwork. Eager to apply knowledge and gain practical experience in a dynamic and fast-paced work environment.
-                </p>
+                <p>{{ profile.overview }}</p>
             </div>
-            <br>
-            <br>
+        {% endif %}
+    </div>
 
+    <!-- Work Experiences -->
+    <div class="section-container work-experiences">
+        <h2>Work Experiences</h2>
+        <ul>
+            {% for experience in profile.work_experiences.all %}
+                <li>
+                    <strong>{{ experience.title }}</strong> at {{ experience.company }}<br>
+                    {{ experience.start_date }} - {{ experience.end_date|default:"Present" }}<br>
+                    {{ experience.description }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-            <!-- Education -->
-            <div class="education">
-                <h2>Education</h2>
-                <p>
-                    <strong>Makerere University</strong><br>
-                    BSc Computer Engineering - Year 4<br>
-                    CGPA: 4.89 (Graduation Date: Jan 2025)
-                </p>
-            </div>
+    <!-- Education -->
+    <div class="section-container education">
+        <h2>Education</h2>
+        <ul>
+            {% for item in profile.education.all %}
+                <li>
+                    <strong>{{ item.degree }}</strong> at {{ item.university }}<br>
+                    {{ item.cgpa }}<br>
+                    {{ item.graduation_date }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-            <!-- Experience -->
-            <div class="experience">
-                <h2>Experience</h2>
-                <p>
-                    <strong>Industrial Trainee, RENU</strong><br>
-                    June 2023 - August 2023<br>
-                    - Developed and performed penetration testing on a web
-                    application that monitors the online reputation of IP addresses
-                    using Django, HTML, CSS and JavaScript and deployed it. <br>
-                    - Installed windows server 2019 and setup active directory. <br>
-                    - Installed Ubuntu server 2018 LTS and setup docker on it. <br>
-                    - Setup and configured Network and Device monitoring tools,
-                    that is, Nagios, Cacti and LibreNMS. <br>  
-                    - Configured Routing protocols of OSPF, IS-IS and Gateway <br>
-                    - Routing Protocols and VLANs. <br>
-                    - Configured point-2-point microwave links. <br>
-                    - Configured a DNS server using BIND9. <br>
-                </p>
-                <!-- Add other experiences -->
-            </div>
+    <!-- Skills -->
+    <div class="section-container skills">
+        <h2>Skills</h2>
+        <ul>
+            {% for skill in profile.skills.all %}
+                <li>{{ skill.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-            <!-- Skills -->
-            <div class="skills">
-                <h2>Skills</h2>
-                <p>
-                    Python, C, Linux, Web Development, MATLAB
-                </p>
-            </div>
+    <!-- Achievements -->
+    <div class="section-container achievements">
+        <h2>Achievements</h2>
+        <ul>
+            {% for achievement in profile.achievements.all %}
+                <li>{{ achievement.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-            <!-- Achievements -->
-            <div class="achievements">
-                <h2>Achievements</h2>
-                <p>
-                    - MikroTik Certified Network Associate (MTCNA)<br>
-                    - ISC2 Certified in Cybersecurity (ISC2 CC)<br>
-                    - Google Cybersecurity Professional Certificate
-                </p>
-            </div>
-        </div>
-    </section>
+    <!-- Projects -->
+    <div class="section-container projects">
+        <h2>Projects</h2>
+        <ul>
+            {% for project in profile.project.all %}
+                <li>{{ project.title }} <br> {{project.description }} <br> <a href="{{project.link }}">{{project.link }}</a></li> <br>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Hobbies -->
+    <div class="section-container hobbies">
+        <h2>Hobbies</h2>
+        <ul>
+            {% for hobby in profile.hobby.all %}
+                <li>{{ hobby.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
 {% endblock %}

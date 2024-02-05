@@ -1,68 +1,54 @@
 {% extends 'base.html' %}
-
-
-{% block content %}
 {% load static %}
-
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Web Developer</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta name="description" content="Web Developer Portfolio of Samuel Kanyesigye">
+    <meta name="keywords" content="web development, software engineering, portfolio">
+    <title>Samuel Kanyesigye - Web Developer Portfolio</title>
+ 
 </head>
+
 <body>
-
-<nav>
-    <ul>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
-
-<section class="hero">
     <div class="hero-content">
-        <h1>Hello, I'm Samuel Kanyesigye</h1>
-        <p>A passionate computer Engineer creating innovative solutions</p>
-        <a href="#portfolio" class="btn">Explore My Work</a>
+        <div class="profile-photo-container">
+            <img src="{% static 'kanye.jpeg' %}" alt="Samuel Kanyesigye" class="profile-photo">
+            <h1>Hello, I'm Samuel Kanyesigye</h1>
+            <p>A passionate computer engineer creating innovative solutions</p>
+            <a href="{% url 'profile_1' %}" class="btn">Explore My Work</a>
+        </div>
+
     </div>
-</section>
+    <main>
+        <div class="about-content">
+            <h2>Welcome!</h2>
+            <p>Hello there! I'm Samuel Kanyesigye, a Computer Engineering student with a passion for technology and innovation. My journey in the world of technology has equipped me with a diverse skill set, ranging from electronics and networks to web development and cybersecurity.</p>
+            <p>With a curious mind and a knack for problem-solving, I love delving into the intricacies of various technologies, exploring their possibilities, and creating solutions that make a positive impact.</p>
+            <p>Feel free to explore my portfolio and discover the projects that showcase my dedication to learning, creativity, and the pursuit of excellence.</p>
+            <a href="{% url 'profile_1' %}" class="btn">Explore My Work</a>
+        </div>
+        
 
-<section id="about" class="about">
-    <div class="about-content">
-        <h2>About Me</h2>
-        <p>Welcome to my portfolio! I'm a web developer with a strong background in...</p>
-        <a href="#portfolio" class="btn">View My Projects</a>
-    </div>
-</section>
+        <section id="contact" class="contact">
+            <div class="contact-content">
+                <h2>Contact Me</h2>
+                <p>Ready to start a project together or have a question?</p>
+                <a href="#contact-form" class="btn">Get in Touch</a>
+            </div>
+        </section>
 
-<section id="portfolio" class="portfolio">
-    <div class="portfolio-content">
-        <h2>Portfolio</h2>
-        <!-- Your project cards go here -->
-    </div>
-</section>
+        <section id="contact-form" class="contact-form">
+            <h2>Send me a message</h2>
+            <!-- Contact form goes here -->
+        </section>
+    </main>
 
-<section id="contact" class="contact">
-    <div class="contact-content">
-        <h2>Contact Me</h2>
-        <p>Ready to start a project together or have a question?</p>
-        <a href="#contact-form" class="btn">Get in Touch</a>
-    </div>
-</section>
-
-<section id="contact-form" class="contact-form">
-    <h2>Send me a message</h2>
-    <!-- Your contact form goes here -->
-</section>
-
-<footer>
-    <p>&copy; 2024 Kanyesigye Samuel-. All rights reserved.</p>
-</footer>
 
 </body>
-</html>
 
+</html>
 {% endblock %}

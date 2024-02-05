@@ -16,9 +16,17 @@
 
         <nav>
             <ul>
+                {% if user.is_authenticated %}
                 <li><a href="/">Home</a></li>
                 <li><a href="{% url 'about_me' %}">About Me</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'about_me' %}">About Me</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                {% endif %}
+
             </ul>
         </nav>
     </header>
@@ -28,8 +36,9 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 My Portfolio</p>
+        <p>&copy; 2024 Kanyesigye Samuel - All rights reserved.</p>
     </footer>
+
 </body>
 
 </html>

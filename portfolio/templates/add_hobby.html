@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Add Hobby {% endblock %}
+<link rel="stylesheet" type="text/css" href="{% static 'form_styles.css' %}">
+{% block content %}
+
+<h1>Add Hobby</h1>
+<form method="post" action=" {% url 'add_hobby' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}
