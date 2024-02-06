@@ -4,7 +4,7 @@ from . models import Profile, WorkExperience, Education, Skill, Achievement, Pro
 from .forms import WorkExperienceForm, ProfileForm, EducationForm, SkillForm, AchievementForm, ProjectForm, HobbyForm
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib import messages
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate, login, get_user_model
 from django.views import View
 from django.http import HttpResponseForbidden, HttpResponse
 from django.utils.decorators import method_decorator
@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.crypto import get_random_string
+import datetime
 
 def custom_logout(request):
     logout(request)
@@ -25,18 +26,18 @@ def about_me(request):
     return render(request, 'about_me.html')
 
 @login_required
-def profile(request):
-    my_profile, created = Profile.objects.get_or_create(id=1)
-    # Pass the profile instance to the template
-    context = {'profile': my_profile}
-    return render(request, 'profile.html', context)
-
-
 def profile_1(request):
     my_profile, created = Profile.objects.get_or_create(id=1)
     # Pass the profile instance to the template
     context = {'profile': my_profile}
     return render(request, 'profile_1.html', context)
+
+
+def profile(request):
+    my_profile, created = Profile.objects.get_or_create(id=1)
+    # Pass the profile instance to the template
+    context = {'profile': my_profile}
+    return render(request, 'profile.html', context)
 
 @login_required
 def update_profile(request):
@@ -46,7 +47,7 @@ def update_profile(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = ProfileForm(instance=profile)
 
@@ -63,7 +64,7 @@ def add_work_experience(request):
             work_experience_instance = form.save()
             profile.work_experiences.add(work_experience_instance)
             messages.success(request, 'Work experience updated successfully!')
-            return redirect('profile_1')
+            return redirect('profile')
         else:
             messages.error(request, 'There were errors in the form. Please correct them.')
     else:
@@ -82,7 +83,7 @@ def update_work_experience(request, pk):
         form = WorkExperienceForm(request.POST, instance=work_experience_instance)
         if form.is_valid():
             form.save()
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = WorkExperienceForm(instance=work_experience_instance)
 
@@ -97,7 +98,7 @@ def add_education(request):
         if form.is_valid():
             education_instance = form.save()
             profile.education.add(education_instance)
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = EducationForm()
 
@@ -114,7 +115,7 @@ def update_education(request, pk):
         form = EducationForm(request.POST, instance=education_instance)
         if form.is_valid():
             form.save()
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = EducationForm(instance=education_instance)
 
@@ -129,7 +130,7 @@ def add_skill(request):
         if form.is_valid():
             skill_instance = form.save()
             profile.skills.add(skill_instance)
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = SkillForm()
     return render(request, 'add_skill.html', {'form':form})
@@ -142,7 +143,7 @@ def add_achievement(request):
         if form.is_valid():
             achievement_instance = form.save()
             profile.achievements.add(achievement_instance)
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = AchievementForm()
     return render(request, 'add_achievement.html', {'form':form})
@@ -156,7 +157,7 @@ def add_project(request):
         if form.is_valid():
             project_instance = form.save()
             profile.project.add(project_instance)
-            return redirect('profile_1')
+            return redirect('profile')
         else:
             form.errors
     else:
@@ -171,7 +172,7 @@ def add_hobby(request):
         if form.is_valid():
             hobby_instance = form.save()
             profile.hobby.add(hobby_instance)
-            return redirect('profile_1')
+            return redirect('profile')
     else:
         form = HobbyForm()
     return render(request, 'add_hobby.html', {'form': form} )
@@ -225,15 +226,45 @@ def login_with_otp(request):
             otp = get_random_string(length=6, allowed_chars='1234567890')
             send_otp_to_email(user.email, otp)
 
-            # Store OTP securely (e.g., in the session)
+            # Store OTP and its creation timestamp securely in the session
             request.session['otp'] = otp
+            request.session['otp_timestamp'] = datetime.datetime.now().timestamp()
+            request.session['user_email'] = user.email
+            print(user.email)
+            return render(request, 'verify_otp.html', {'username': username, 'email': user.email})
 
-            return render(request, 'verify_otp.html', {'username': username})
         else:
             # Handle incorrect credentials
             pass
 
     return render(request, 'login.html')
+
+def verify_otp(request):
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        stored_otp = request.session.get('otp')
+        user_email = request.session.get('user_email')
+        otp_timestamp = request.session.get('otp_timestamp')
+
+        if entered_otp == stored_otp:
+            # Check if OTP is expired (current time - timestamp > 3 minutes)
+            if datetime.datetime.now().timestamp() - otp_timestamp > 600:
+                messages.error(request, 'OTP has expired. Please request a new one.')
+            else:
+                User = get_user_model()
+                try:
+                    user = User.objects.get(email=user_email)
+                    login(request, user)
+                    del request.session['otp']
+                    del request.session['otp_timestamp']
+                    del request.session['user_email']
+                    return redirect('home')
+                except User.DoesNotExist:
+                    messages.error(request, 'User with provided email not found')
+        else:
+            messages.error(request, 'Invalid OTP')
+
+    return render(request, 'verify_otp.html')
 
 def send_otp_to_email(email, otp):
     # Customize this function to send the OTP to the user's email
@@ -242,21 +273,3 @@ def send_otp_to_email(email, otp):
     from_email = 'your@example.com'
     recipient_list = [email]
     send_mail(subject, message, from_email, recipient_list)
-
-
-def verify_otp(request):
-    user = authenticate(request, username=request.user.username, password='dummy_password')
-    login(request, user)
-    if request.method == 'POST':
-        entered_otp = request.POST.get('otp')
-        stored_otp = request.session.get('otp')
-
-        if entered_otp == stored_otp:
-            # OTP is valid; log the user in
-
-            del request.session['otp']
-            return redirect('home') 
-        else:
-            messages.error(request, 'Invalid OTP')
-
-    return render(request, 'verify_otp.html', {'user_email': user_email})

@@ -6,20 +6,8 @@
 
 {% block content %}
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
-        margin: 0;
-    }
 
-
-
-
-   
-
-
-</style>
+  </style>
 
 <section class="profile-section">
     <div class="profile-header">
@@ -76,7 +64,7 @@
         <h2>Skills</h2>
         <ul>
             {% for skill in profile.skills.all %}
-                <li>{{ skill.name }} <a href="{% url 'delete_skill' pk=skill.pk %}">Delete</a></li>
+                <li>{{ skill.name }} <a href="{% url 'delete_skill' pk=skill.pk %}"> Delete</a></li>
             {% endfor %}
         </ul>
         <a class="add-link" href="{% url 'add_skill' %}">Add a Skill</a>
@@ -87,7 +75,7 @@
         <h2>Achievements</h2>
         <ul>
             {% for achievement in profile.achievements.all %}
-                <li>{{ achievement.title }} <a href="{% url 'delete_achievement' pk=achievement.pk %}">Delete</a></li>
+                <li>{{ achievement.title }} <a href="{% url 'delete_achievement' pk=achievement.pk %}"> Delete</a></li>
             {% endfor %}
         </ul>
         <a class="add-link" href="{% url 'add_achievement'  %}">Add Achievement</a>
@@ -98,7 +86,7 @@
         <h2>Projects</h2>
         <ul>
             {% for project in profile.project.all %}
-                <li>{{ project.title }} <br> {{project.description }} <br> <a href="{{project.link }}">{{project.link }}</a><a href="{% url 'delete_project' pk=project.pk %}">Delete</a></li> <br>
+                <li><b>{{ project.title }} </b><br> {{project.description }} <br> <a href="{{project.link }}">{{project.link }}</a><a href="{% url 'delete_project' pk=project.pk %}"> Delete</a></li> <br>
             {% endfor %}
         </ul>
         <a class="add-link" href="{% url 'add_project'  %}">Add Project</a>
@@ -109,7 +97,7 @@
         <h2>Hobbies</h2>
         <ul>
             {% for hobby in profile.hobby.all %}
-                <li>{{ hobby.title }} <a href="{% url 'delete_hobby' pk=hobby.pk %}">Delete</a></li>
+                <li>{{ hobby.title }} <a href="{% url 'delete_hobby' pk=hobby.pk %}"> Delete</a></li>
             {% endfor %}
         </ul>
         <a class="add-link" href="{% url 'add_hobby'  %}">Add Hobby</a>

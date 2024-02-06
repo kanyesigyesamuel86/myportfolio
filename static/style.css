@@ -11,16 +11,73 @@ ul {
 
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #f7f7f7;
     color: #333;
+    margin: 0;
 }
+
 
 header {
     background-color: #009688;
     color: #fff;
     padding: 20px;
     text-align: center;
+}
+
+
+
+.profile-photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px; /* Add padding around the items */
+    text-align: center; /* Center text horizontally */
+}
+
+.profile-photo {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px; /* Add margin between the photo and text */
+}
+
+/* Add styles for other items */
+h1, p, .btn {
+    margin: 5px 0; /* Add margin to each item for spacing */
+}
+
+.about-content {
+    text-align: center; /* Center-align text */
+    padding: 20px; /* Add padding around the content */
+}
+
+.about-content h2 {
+    color: #3498db; /* Set the color of the heading */
+}
+
+.about-content p {
+    color: #555; /* Set the color of the text */
+    line-height: 1.6; /* Adjust line height for better readability */
+    margin-bottom: 15px; /* Add bottom margin between paragraphs */
+}
+
+.about-content .btn {
+    display: inline-block;
+    margin-top: 20px; /* Add top margin for spacing */
+    padding: 10px 20px; /* Adjust padding for the button */
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Smooth transition effect for color change */
+}
+
+.about-content .btn:hover {
+    background-color: #2980b9; /* Change background color on hover */
 }
 
 
@@ -49,8 +106,8 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
+    position: relative; /* Change fixed to relative */
+    bottom: 0; /* Align the bottom of the footer */
     width: 100%;
 }
 
@@ -82,14 +139,14 @@ textarea {
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px 15px;
+    padding: 4px 4px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #63211c;
 }
 
 a {
@@ -99,5 +156,128 @@ a {
 }
 
 a:hover {
-    color: #31af2c;
+    color: #5c240e;
 }
+
+
+.profile-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-header h1 {
+    color: #3498db;
+}
+
+.profile-header h2 {
+    color: #555;
+}
+
+.profile-header p {
+    margin: 5px 0;
+}
+
+.overview {
+    margin-top: 15px;
+}
+
+.update-profile-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 4px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.section-container {
+    margin-top: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+
+.add-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 4px;
+    background-color: #2ecc71;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.update-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 4px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+
+form {
+    width: 300px;
+    margin: 0 auto; /* Centering the form horizontally */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling form labels */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Adjust label color */
+  }
+  
+  /* Styling input fields */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling the submit button */
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect on submit button */
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }

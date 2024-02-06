@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Login</h2>
+
   <form method="post" action="{% url 'login' %}">
+    <h2>Login</h2>
+    <p>If you're Kanyesigye, login to Edit your profile</p>
     {% csrf_token %}
     <label for="username">Username/Email:</label>
     <input type="text" name="username" required>

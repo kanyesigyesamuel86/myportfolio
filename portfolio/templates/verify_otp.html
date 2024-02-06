@@ -2,11 +2,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Enter OTP</h2>
+
   <form method="post" action="{% url 'verify_otp' %}">
+    <h2>Enter OTP</h2>
+    {% if messages %}
+    <ul class="error-message">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
     {% csrf_token %}
     <input type="hidden" name="username" value="{{ username }}">
-    <p>An OTP has been sent to {{user_email}}</p>
+    <p>An OTP has been sent to <b> {{email}}</b>. Please check your email and enter the OTP below:</p>
     <label for="otp">Enter OTP:</label>
     <input type="text" name="otp" required>
     <button type="submit">Verify OTP</button>
