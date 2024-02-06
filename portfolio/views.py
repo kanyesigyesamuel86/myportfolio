@@ -245,18 +245,18 @@ def send_otp_to_email(email, otp):
 
 
 def verify_otp(request):
+    user = authenticate(request, username=request.user.username, password='dummy_password')
+    login(request, user)
     if request.method == 'POST':
-        user_email =request.user.email
         entered_otp = request.POST.get('otp')
         stored_otp = request.session.get('otp')
 
         if entered_otp == stored_otp:
             # OTP is valid; log the user in
-            user = authenticate(request, username=request.user.username, password='dummy_password')
-            login(request, user)
+
             del request.session['otp']
             return redirect('home') 
         else:
             messages.error(request, 'Invalid OTP')
 
-    return render(request, 'verify_otp.html')
+    return render(request, 'verify_otp.html', {'user_email': user_email})
