@@ -47,7 +47,7 @@ def update_profile(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = ProfileForm(instance=profile)
 
@@ -64,7 +64,7 @@ def add_work_experience(request):
             work_experience_instance = form.save()
             profile.work_experiences.add(work_experience_instance)
             messages.success(request, 'Work experience updated successfully!')
-            return redirect('profile')
+            return redirect('profile_1')
         else:
             messages.error(request, 'There were errors in the form. Please correct them.')
     else:
@@ -83,7 +83,7 @@ def update_work_experience(request, pk):
         form = WorkExperienceForm(request.POST, instance=work_experience_instance)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = WorkExperienceForm(instance=work_experience_instance)
 
@@ -98,7 +98,7 @@ def add_education(request):
         if form.is_valid():
             education_instance = form.save()
             profile.education.add(education_instance)
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = EducationForm()
 
@@ -115,7 +115,7 @@ def update_education(request, pk):
         form = EducationForm(request.POST, instance=education_instance)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = EducationForm(instance=education_instance)
 
@@ -130,7 +130,7 @@ def add_skill(request):
         if form.is_valid():
             skill_instance = form.save()
             profile.skills.add(skill_instance)
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = SkillForm()
     return render(request, 'add_skill.html', {'form':form})
@@ -143,7 +143,7 @@ def add_achievement(request):
         if form.is_valid():
             achievement_instance = form.save()
             profile.achievements.add(achievement_instance)
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = AchievementForm()
     return render(request, 'add_achievement.html', {'form':form})
@@ -157,7 +157,7 @@ def add_project(request):
         if form.is_valid():
             project_instance = form.save()
             profile.project.add(project_instance)
-            return redirect('profile')
+            return redirect('profile_1')
         else:
             form.errors
     else:
@@ -172,7 +172,7 @@ def add_hobby(request):
         if form.is_valid():
             hobby_instance = form.save()
             profile.hobby.add(hobby_instance)
-            return redirect('profile')
+            return redirect('profile_1')
     else:
         form = HobbyForm()
     return render(request, 'add_hobby.html', {'form': form} )
@@ -180,37 +180,37 @@ def add_hobby(request):
 @method_decorator(login_required, name='dispatch')
 class DeleteExperienceView(DeleteView):
     model = WorkExperience
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_1')
     template_name = 'delete_confirm.html'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteEducationView(DeleteView):
     model = Education
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_1')
     template_name = 'delete_confirm.html'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteProjectView(DeleteView):
     model = Project
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_1')
     template_name = 'delete_confirm.html'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteSkillView(DeleteView):
     model = Skill
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_1')
     template_name = 'delete_confirm.html'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteAchievementView(DeleteView):
     model = Achievement
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_1')
     template_name = 'delete_confirm.html'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteHobbyView(DeleteView):
     model = Hobby
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile_1')
     template_name = 'delete_confirm.html'
 
 
@@ -266,6 +266,22 @@ def verify_otp(request):
 
     return render(request, 'verify_otp.html')
 
+def contact(request):
+    if request.method == 'POST': 
+        profile, created = Profile.objects.get_or_create(id=1)
+        email = profile.email
+        sender_email = request.POST['email']
+        phone = request.POST['phone']
+        message_content= request.POST['message']     
+        subject = 'Inquiry'
+        message = f' {message_content}. \n Reach me Here {phone}. \n My email is {sender_email}.'
+        recipient_list = [email]
+        send_mail(subject, message,'', recipient_list)
+        return redirect('success')  
+
+    return render(request, 'contact.html')
+
+
 def send_otp_to_email(email, otp):
     # Customize this function to send the OTP to the user's email
     subject = 'Your OTP for Login'
@@ -273,3 +289,4 @@ def send_otp_to_email(email, otp):
     from_email = 'your@example.com'
     recipient_list = [email]
     send_mail(subject, message, from_email, recipient_list)
+

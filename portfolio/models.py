@@ -9,6 +9,15 @@ class WorkExperience(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     description = models.TextField()
+    def save(self, *args, **kwargs):
+        # Split the description into outlines based on full stops
+        outlines = self.description.split(". ")
+
+        # Join the outlines back into a string with line breaks
+        self.description = "\n".join(outlines)
+
+        # Call the original save method to save the object with the modified description
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.title} at {self.company}"
@@ -39,6 +48,10 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     description =models.TextField()
     link = models.URLField()
+    def save(self, *args, **kwargs):
+        outlines = self.description.split(". ")
+        self.description = "\n".join(outlines)
+        super().save(*args, **kwargs)
 
 class Hobby(models.Model):
     title = models.CharField(max_length=50)
@@ -61,7 +74,16 @@ class Profile(models.Model):
     education = models.ManyToManyField(Education)
     project = models.ManyToManyField(Project)
     hobby = models.ManyToManyField(Hobby)
+    def save(self, *args, **kwargs):
+        outlines = self.overview.split(". ")
+        self.overview = "\n".join(outlines)
+        super().save(*args, **kwargs)
     
 
     def __str__(self):
         return self.full_name
+
+class Contact(models.Model):
+    email_field = models.EmailField()
+    tel = models.TextField(max_length =200)
+    message_field= models.TextField(max_length =200)

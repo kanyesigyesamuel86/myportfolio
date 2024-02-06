@@ -105,7 +105,7 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     position: relative; /* Change fixed to relative */
     bottom: 0; /* Align the bottom of the footer */
     width: 100%;
@@ -240,7 +240,7 @@ li {
 
 
 form {
-    width: 300px;
+    width: 400px;
     margin: 0 auto; /* Centering the form horizontally */
     padding: 20px;
     background-color: #f9f9f9;

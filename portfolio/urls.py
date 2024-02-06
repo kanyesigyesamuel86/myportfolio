@@ -1,10 +1,9 @@
 from django.urls import path
-from .views import home, about_me, profile, profile_1, add_work_experience, update_work_experience, update_profile, add_education, update_education, add_skill, add_achievement, add_project, add_hobby, custom_logout, DeleteExperienceView, DeleteAchievementView, DeleteEducationView, DeleteHobbyView, DeleteProjectView, DeleteSkillView, login_with_otp, verify_otp
-from django.contrib.auth.views import LoginView
+from .views import home, about_me, profile, profile_1, add_work_experience, update_work_experience, update_profile, add_education, update_education, add_skill, add_achievement, add_project, add_hobby, custom_logout, DeleteExperienceView, DeleteAchievementView, DeleteEducationView, DeleteHobbyView, DeleteProjectView, DeleteSkillView, login_with_otp, verify_otp, contact
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    #path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('login/', login_with_otp, name = 'login'),
     path('logout/', custom_logout, name='logout'),
     path('', home, name = 'home'),
@@ -27,6 +26,9 @@ urlpatterns = [
     path('delete_project/<int:pk>/', DeleteProjectView.as_view(), name='delete_project'),
     path('delete_hobby/<int:pk>/', DeleteHobbyView.as_view(), name='delete_hobby'),
     path('delete_skill/<int:pk>/', DeleteSkillView.as_view(), name='delete_skill'),
-    path('verify_otp/', verify_otp, name = 'verify_otp')
+    path('verify_otp/', verify_otp, name = 'verify_otp'),
+    path('contact/', contact, name = 'contact'),
+    path('success/', TemplateView.as_view(template_name='success_page.html'), name='success'),
+  
 
 ]

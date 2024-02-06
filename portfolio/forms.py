@@ -1,10 +1,9 @@
 from django import forms
-from .models import WorkExperience,  Education, Skill, Achievement, Profile, Project, Hobby
+from .models import WorkExperience,  Education, Skill, Achievement, Profile, Project, Hobby, Contact
 
 class WorkExperienceForm(forms.ModelForm):
     class Meta:
         model = WorkExperience
-        fields = '__all__'
         fields = ['title', 'company', 'start_date', 'end_date', 'description']
 
 
@@ -41,3 +40,7 @@ class HobbyForm(forms.ModelForm):
         fields = ['title']
 
 
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = '__all__'
