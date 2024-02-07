@@ -10,6 +10,26 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
+<style>
+    footer a img {
+    width: 20px; /* Set a fixed width for the icons */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Apply rounded corners */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+footer a {
+    margin: 0 15px; /* Add horizontal spacing between the icons */
+}
+
+
+footer a img:hover {
+    transform: scale(1.1); /* Scale up the icon on hover */
+}
+
+</style>
+
+
 <body>
     <header>
         <h1>{% block header %}Kanyesigye - Computer Engineer{% endblock %}</h1>
@@ -17,19 +37,22 @@
         <nav>
             <ul>
                 {% if user.is_authenticated %}
-                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about_me' %}">About Me</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about_me' %}">About Me</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <a href="{% url 'contact' %}" class="btn" style="border: 1px;
                 border-style: solid;
                 border-radius: 30%;
+                font-size: large;
+                color: aliceblue;
                 
                 ">?</a>
-                {% else %}
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'about_me' %}">About Me</a></li>
-                <li><a href="{% url 'profile' %}">Profile</a></li>
+
                 {% endif %}
 
             </ul>
@@ -41,7 +64,21 @@
     </main>
 
     <footer>
-        <a href="{% url 'contact' %}" class="btn">Get in Touch</a>
+        <div> <a href="{% url 'contact' %}" class="btn">Get in Touch</a></div>
+        <br>
+        <a href="https://www.facebook.com/kanyesigye.samuel.54" target="_blank">
+            <img src="{% static 'images/facebook-icon.png' %}" alt="Facebook">
+        </a>
+        <a href="https://www.linkedin.com/in/kanyesigye-samuel-9420b6254/" target="_blank">
+            <img src="{% static 'images/linkedin-icon.png' %}" alt="Linkedin">
+        </a>
+        <a href="https://twitter.com/KanyesigyeSam11" target="_blank">
+            <img src="{% static 'images/twitter-icon.png' %}" alt="Twitter">
+        </a>
+        <a href="#" target="_blank">
+            <img src="{% static 'images/instagram-icon.png' %}" alt="Instagram">
+        </a>
+        
         <p>&copy; 2024 Kanyesigye Samuel - All rights reserved.</p>
     </footer>
 

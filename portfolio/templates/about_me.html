@@ -1,4 +1,6 @@
+<html>
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}About Me{% endblock %}
 
@@ -6,17 +8,51 @@
     <section id="about" class="about">
         <div class="about-content">
             <h2>About Me</h2>
-            <p>Welcome to my portfolio! I'm a passionate web developer with a strong background in...</p>
-            <p>Here are a few things about me:</p>
-            <ul>
-                <li>I am currently attending a degree in Computer Engineering from Makerere University.</li>
-                <li>I am much into computer communication networks</li>
-                <li>I also do web development using technologies like Django, HTML, CSS, and JavaScript.</li>
-                <li>I am recently highly interested in Information Security, i am very passionate about having peopl's networks, computer systems and data highly secured</li>
-                <li>I enjoy solving complex problems and building innovative solutions.</li>
-                <!-- Add more points about yourself -->
-            </ul>
-            <a href="{% url 'profile_1' %}" class="btn">View My Works</a>
+            <p>Welcome to my portfolio! I'm a passionate computer engineer with a strong background in Computer Networks, Linux Systems, Web Development, Embedded Systems and Cybersecurity</p>
+            <p>Here are a few things about me:
+                I am currently attending a degree in Computer Engineering from Makerere University.I am much into computer communication networks.
+                I also do web development using technologies like Django, HTML, CSS, and JavaScript.
+                I am recently highly interested in Information Security, i am very passionate about having peopl's networks, computer systems and data highly secured.
+                I enjoy solving complex problems and building innovative solutions.
+                
+            </p>    
+            <a href="{% url 'profile' %}" class="btn">View My Works</a>
         </div>
+
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+              <img src="{% static 'images/image1.JPEG' %}" style="width:300px; height: 400px; border-radius: 10px;">
+            </div>
+          
+            <div class="mySlides fade">
+              <img src="{% static 'images/image2.jpg' %}" style="width:300px; height: 400px; border-radius: 10px;">
+            </div>
+          
+            <div class="mySlides fade">
+              <img src="{% static 'images/image3.jpg' %}" style="width:300px; height: 400px; border-radius: 10px;">
+            </div>
+          </div>
+          
     </section>
+    <script>
+        var slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}    
+          slides[slideIndex-1].style.display = "block";  
+          setTimeout(showSlides, 4000); // Change image every 2 seconds
+        }
+        
+        </script>
+
 {% endblock %}
+    
+
+</html>

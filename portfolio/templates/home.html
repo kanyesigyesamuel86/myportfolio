@@ -12,11 +12,14 @@
     <title>Samuel Kanyesigye - Web Developer Portfolio</title>
  
 </head>
+<style>
 
+
+</style>
 <body>
     <div class="hero-content">
         <div class="profile-photo-container">
-            <img src="{% static 'kanye.jpeg' %}" alt="Samuel Kanyesigye" class="profile-photo">
+            <img src="{% static 'images/kanye.jpeg' %}" alt="Samuel Kanyesigye" class="profile-photo">
             <h1>Hello, I'm Samuel Kanyesigye</h1>
             <p>A passionate computer engineer creating innovative solutions</p>
             <a href="{% url 'profile_1' %}" class="btn">Explore My Work</a>
@@ -26,13 +29,27 @@
     <main>
         <div class="about-content">
             <h2>Welcome!</h2>
+            <b><p>Take your time and explore my portfolio..!</p></b>
             <p>Hello there! I'm Samuel Kanyesigye, a Computer Engineering student with a passion for technology and innovation. My journey in the world of technology has equipped me with a diverse skill set, ranging from electronics and networks to web development and cybersecurity.</p>
             <p>With a curious mind and a knack for problem-solving, I love delving into the intricacies of various technologies, exploring their possibilities, and creating solutions that make a positive impact.</p>
             <p>Feel free to explore my portfolio and discover the projects that showcase my dedication to learning, creativity, and the pursuit of excellence.</p>
             <a href="{% url 'profile_1' %}" class="btn">Explore My Work</a>
         </div>
         
-
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+              <img src="{% static 'images/image1.JPEG' %}" style="width:300px; height: 400px; border-radius: 10px;">
+            </div>
+          
+            <div class="mySlides fade">
+              <img src="{% static 'images/image2.jpg' %}" style="width:300px; height: 400px; border-radius: 10px;">
+            </div>
+          
+            <div class="mySlides fade">
+              <img src="{% static 'images/image3.jpg' %}" style="width:300px; height: 400px; border-radius: 10px;">
+            </div>
+          </div>
+          
         <section id="contact" class="contact">
             <div class="contact-content">
                 <h2>Contact Me</h2>
@@ -41,14 +58,28 @@
             </div>
         </section>
 
-        <section id="contact-form" class="contact-form">
-            <h2>Send me a message</h2>
-            <!-- Contact form goes here -->
-        </section>
     </main>
 
 
 </body>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  slides[slideIndex-1].style.display = "block";  
+  setTimeout(showSlides, 4000); // Change image every 2 seconds
+}
+
+</script>
 
 </html>
 {% endblock %}

@@ -4,13 +4,13 @@ from .models import WorkExperience,  Education, Skill, Achievement, Profile, Pro
 class WorkExperienceForm(forms.ModelForm):
     class Meta:
         model = WorkExperience
-        fields = ['title', 'company', 'start_date', 'end_date', 'description']
+        fields = ['position', 'company', 'start_date', 'end_date', 'work_done']
 
 
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
-        fields = ['degree', 'university', 'graduation_date', 'cgpa']
+        fields = ['program', 'school_or_university', 'grade', 'year_started', 'year_ended']
 
 class SkillForm(forms.ModelForm):
     class Meta:
@@ -20,13 +20,13 @@ class SkillForm(forms.ModelForm):
 class AchievementForm(forms.ModelForm):
     class Meta:
         model = Achievement
-        fields = ['title']
+        fields = ['name', 'url']
 
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['full_name', 'title', 'contact_number_1', 'contact_number_2', 'email', 'github_url', 'overview']
+        fields = ['full_name', 'area_of_study', 'contact_number_1', 'contact_number_2', 'email', 'github_url', 'summary']
 
 class ProjectForm(forms.ModelForm):
     class Meta:

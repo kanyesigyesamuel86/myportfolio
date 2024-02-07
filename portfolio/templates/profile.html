@@ -2,11 +2,11 @@
 
 {% extends 'base.html' %}
 
-{% block title %}{{ profile.full_name }} - {{ profile.title }}{% endblock %}
+{% block title %}{{ profile.full_name }} - {{ profile.area_of_study }}{% endblock %}
 
 {% block content %}
 
-<section class="profile-section">
+<section class="content">
  <a href="{% url 'profile_1' %}" style="
     width: 10%;
     padding: 0px;
@@ -20,7 +20,7 @@
     > Edit</a> <button  id="downloadBtn" >Download PDF</button>
     <div class="profile-header">
         <h1>{{ profile.full_name }}</h1>
-        <h2>{{ profile.title }}</h2>
+        <h2>{{ profile.area_of_study }}</h2>
         {% if profile.contact_number_1 %}
             <p>Contact: {{ profile.contact_number_1 }}, {{ profile.contact_number_2 }}</p>
         {% endif %}
@@ -30,9 +30,9 @@
         {% if profile.github_url %}
             <p>GitHub: <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
         {% endif %}
-        {% if profile.overview %}
+        {% if profile.summary %}
             <div class="overview">
-                <p>{{ profile.overview }}</p>
+                <p>{{ profile.summary}}</p>
             </div>
         {% endif %}
     </div>
@@ -43,9 +43,9 @@
         <ul>
             {% for experience in profile.work_experiences.all %}
                 <li>
-                    <strong>{{ experience.title }}</strong> at {{ experience.company }}<br>
+                    <strong>{{ experience.position }}</strong> at {{ experience.company }}<br>
                     {{ experience.start_date }} - {{ experience.end_date|default:"Present" }}<br>
-                    {{ experience.description }}
+                    {{ experience.workdone }}
                 </li>
             {% endfor %}
         </ul>
@@ -57,9 +57,9 @@
         <ul>
             {% for item in profile.education.all %}
                 <li>
-                    <strong>{{ item.degree }}</strong> at {{ item.university }}<br>
-                    {{ item.cgpa }}<br>
-                    {{ item.graduation_date }}
+                    <strong>{{ item.program}}</strong> at {{ item.school_or_university }}<br>
+                    {{ item.grade }}<br>
+                    {{ item.year_started }} - {{ item.year_started }}
                 </li>
             {% endfor %}
         </ul>
@@ -80,7 +80,7 @@
         <h2>Achievements</h2>
         <ul>
             {% for achievement in profile.achievements.all %}
-                <li>{{ achievement.title }}</li>
+                <li><a href="achievement.url">{{ achievement.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -90,7 +90,7 @@
         <h2>Projects</h2>
         <ul>
             {% for project in profile.project.all %}
-                <li>{{ project.title }} <br> {{project.description }} <br> <a href="{{project.link }}">{{project.link }}</a></li> <br>
+                <li>{{ project.title }} <br> {{project.description }} <br> <a href="{{project.link }}">Link</a></li> <br>
             {% endfor %}
         </ul>
     </div>

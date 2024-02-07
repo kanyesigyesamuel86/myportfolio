@@ -2,22 +2,18 @@
 
 {% extends 'base.html' %}
 
-{% block title %}{{ profile.full_name }} - {{ profile.title }}{% endblock %}
+{% block title %}{{ profile.full_name }} - {{ profile.area_of_study }}{% endblock %}
 
 {% block content %}
-<style>
-
-  </style>
-
-<section class="profile-section">
+<section class="content">
     <div class="profile-header">
         <h1>{{ profile.full_name }}</h1>
-        <h2>{{ profile.title }}</h2>
+        <h2>{{ profile.area_of_study}}</h2>
         <p>Contact: {{ profile.contact_number_1 }}, {{ profile.contact_number_2 }}</p>
         <p>Email: {{ profile.email }}</p>
         <p>GitHub: <a href="{{ profile.github_url }}" target="_blank">{{ profile.github_url }}</a></p>
         <div class="overview">
-            <p>{{ profile.overview }}</p>
+            <p>{{ profile.summary }}</p>
         </div>
         <a class="update-profile-link" href="{% url 'update_profile' %}">Update Profile</a>
         <a href="{% url 'profile_1' %}">View Full Profile</a>
@@ -29,9 +25,9 @@
         <ul>
             {% for experience in profile.work_experiences.all %}
                 <li>
-                    <strong>{{ experience.title }}</strong> at {{ experience.company }}<br>
+                    <strong>{{ experience.position }}</strong> at {{ experience.company }}<br>
                     {{ experience.start_date }} - {{ experience.end_date|default:"Present" }}<br>
-                    {{ experience.description }}
+                    {{ experience.work_done }}
                     <br>
                     <a class="update-link" href="{% url 'update_work_experience' pk=experience.pk %}">Update</a>
                     <a href="{% url 'delete_experience' pk=experience.pk %}">Delete</a>
@@ -47,9 +43,9 @@
         <ul>
             {% for item in profile.education.all %}
                 <li>
-                    <strong>{{ item.degree }}</strong> at {{ item.university }}<br>
-                    {{ item.cgpa }}<br>
-                    {{ item.graduation_date }}
+                    <strong>{{ item.program }}</strong> at {{ item.school_or_university }}<br>
+                    {{ item.grade }}<br>
+                    {{ item.year_started}} - {{ item.year_ended}}
                     <br>
                     <a class="update-link" href="{% url 'update_education' pk=item.pk %}">Update</a>
                     <a href="{% url 'delete_education' pk=item.pk %}">Delete</a>
@@ -75,7 +71,7 @@
         <h2>Achievements</h2>
         <ul>
             {% for achievement in profile.achievements.all %}
-                <li>{{ achievement.title }} <a href="{% url 'delete_achievement' pk=achievement.pk %}"> Delete</a></li>
+                <li><a href="{{achievement.url}}">{{ achievement.name }}</a> <a href="{% url 'delete_achievement' pk=achievement.pk %}"> Delete</a></li>
             {% endfor %}
         </ul>
         <a class="add-link" href="{% url 'add_achievement'  %}">Add Achievement</a>
@@ -86,7 +82,7 @@
         <h2>Projects</h2>
         <ul>
             {% for project in profile.project.all %}
-                <li><b>{{ project.title }} </b><br> {{project.description }} <br> <a href="{{project.link }}">{{project.link }}</a><a href="{% url 'delete_project' pk=project.pk %}"> Delete</a></li> <br>
+                <li><b>{{ project.title }} </b><br> {{project.description }} <br> <a href="{{project.link }}">Link</a><a href="{% url 'delete_project' pk=project.pk %}"> Delete</a></li> <br>
             {% endfor %}
         </ul>
         <a class="add-link" href="{% url 'add_project'  %}">Add Project</a>

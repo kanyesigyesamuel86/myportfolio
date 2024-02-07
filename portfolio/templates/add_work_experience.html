@@ -6,19 +6,18 @@
 <link rel="stylesheet" type="text/css" href="{% static 'form_styles.css' %}">
 
 {% block content %}
-    <h2>Add Work Experience</h2>
     <form method="post" action="{% url 'add_work_experience' %}">
+      <h2>Add Work Experience</h2><br>
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="{% if message.tags %}alert alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>       
     </form>
-
-    {% if messages %}
-    <div class="messages">
-      {% for message in messages %}
-        <div class="{% if message.tags %}alert alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
   
 {% endblock %}
