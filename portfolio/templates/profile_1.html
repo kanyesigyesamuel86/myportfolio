@@ -16,7 +16,7 @@
             <p>{{ profile.summary }}</p>
         </div>
         <a class="update-profile-link" href="{% url 'update_profile' %}">Update Profile</a>
-        <a href="{% url 'profile_1' %}">View Full Profile</a>
+        <a href="{% url 'profile' %}">View Full Profile</a>
     </div>
 
     <!-- Work Experiences -->
@@ -44,7 +44,7 @@
             {% for item in profile.education.all %}
                 <li>
                     <strong>{{ item.program }}</strong> at {{ item.school_or_university }}<br>
-                    {{ item.grade }}<br>
+                    Grade: {{ item.grade }}<br>
                     {{ item.year_started}} - {{ item.year_ended}}
                     <br>
                     <a class="update-link" href="{% url 'update_education' pk=item.pk %}">Update</a>

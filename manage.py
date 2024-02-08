@@ -13,6 +13,7 @@ def load_env():
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myportfolio.settings')
         os.environ['EMAIL_HOST_USER'] = config('EMAIL_HOST_USER')
         os.environ['EMAIL_HOST_PASSWORD'] = config('EMAIL_HOST_PASSWORD')
+        os.environ['SECRET_KEY'] = config('SECRET_KEY')
     except FileNotFoundError:
         print(".env file not found. Make sure to create it.")
 

@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from portfolio.views import custom_404_view,  custom_500_view, permission_denied_view
+from django.conf.urls import handler500, handler403
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/login', custom_admin_login, name='admin_login'),
+    #path('admin/', admin.site.urls),
     path('', include('portfolio.urls'))
 ]
+handler404 = custom_404_view
+handler500 = custom_500_view
+handler403 = permission_denied_view

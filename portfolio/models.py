@@ -17,7 +17,7 @@ class WorkExperience(models.Model):
 class Education(models.Model):
     program = models.CharField(max_length=255)
     school_or_university = models.CharField(max_length=255)
-    grade = models.FloatField()
+    grade = models.CharField(max_length = 20)
     year_started = models.IntegerField(null = True, blank = True)
     year_ended= models.IntegerField(null=True, blank=True)
 

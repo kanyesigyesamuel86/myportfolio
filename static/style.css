@@ -52,7 +52,12 @@ h1, p, .btn {
 
 .about-content {
     text-align: center; /* Center-align text */
-    padding: 20px; /* Add padding around the content */
+    padding: 50px; 
+    justify-content: center; /* Horizontally center the images */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 50px;
+    border-radius: 10px;
+  
 }
 
 .about-content h2 {
@@ -61,8 +66,8 @@ h1, p, .btn {
 
 .about-content p {
     color: #555; /* Set the color of the text */
-    line-height: 1.6; /* Adjust line height for better readability */
-    margin-bottom: 15px; /* Add bottom margin between paragraphs */
+    line-height: 1.6; 
+    margin-bottom: 15px; 
 }
 
 .about-content .btn {
@@ -105,10 +110,21 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     position: relative; /* Change fixed to relative */
     bottom: 0; /* Align the bottom of the footer */
     width: 100%;
+}
+
+footer a img {
+    width: 40px; /* Set a fixed width for the icons */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Apply rounded corners */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+footer a img:hover {
+    transform: scale(1.1); /* Scale up the icon on hover */
 }
 
 h2 {
@@ -117,9 +133,51 @@ h2 {
 }
 
 form {
-    max-width: 600px;
-    margin: 20px auto;
-}
+    margin: 20px 400px; /* Centering the form horizontally */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling form labels */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Adjust label color */
+  }
+  
+  /* Styling input fields */
+input, 
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font: 1em sans-serif;
+  }
+  
+
+
+  /* Styling the submit button */
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect on submit button */
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
 
 label {
     display: block;
@@ -127,14 +185,6 @@ label {
     margin-bottom: 8px;
 }
 
-input[type="text"],
-input[type="date"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-}
 
 button {
     background-color: #4CAF50;
@@ -159,10 +209,10 @@ a:hover {
     color: #5c240e;
 }
 
+/* profile page */
 
-.profile-section {
-    max-width: 800px;
-    margin: 20px auto;
+.content {
+    margin: auto 200px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -170,7 +220,7 @@ a:hover {
 }
 
 .profile-header {
-    margin-bottom: 20px;
+    padding: 10px 10px;
 }
 
 .profile-header h1 {
@@ -239,45 +289,42 @@ li {
 }
 
 
-form {
-    width: 300px;
-    margin: 0 auto; /* Centering the form horizontally */
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Styling form labels */
-  label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333; /* Adjust label color */
-  }
-  
-  /* Styling input fields */
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
+
+  .section-container {
+    flex: 1 1 calc(50% - 20px); /* Adjust the width as needed */
+    margin: 10px;
     padding: 10px;
-    margin-bottom: 50px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
+    background-color: #f9f9f9;
   }
+
+  .error-message {
+    color: #c03333;
+  }
+
+
+/* transition images */
+.slideshow-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the images */
+    align-items: center; /* Vertically center the images */
+}
+.mySlides {
+display: none;
+}
+
+.fade {
+animation-name: fade;
+animation-duration: 2.5s;
+}
+
+@keyframes fade {
+from {
+  opacity: 0.4;
+}
+to {
+  opacity: 1;
+}
+}
   
-  /* Styling the submit button */
-  button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Hover effect on submit button */
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }

@@ -14,6 +14,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils.crypto import get_random_string
 import datetime
+from django.contrib.admin.views.decorators import staff_member_required
 
 def custom_logout(request):
     logout(request)
@@ -221,22 +222,29 @@ def login_with_otp(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
 
+        next_url = request.GET.get('next')
+        print('Next =',next_url)
+        if next_url:
+            request.session['next_url'] = next_url 
+
         if user is not None:
             # Generate and send OTP
             otp = get_random_string(length=6, allowed_chars='1234567890')
             send_otp_to_email(user.email, otp)
 
             # Store OTP and its creation timestamp securely in the session
+
             request.session['otp'] = otp
             request.session['otp_timestamp'] = datetime.datetime.now().timestamp()
             request.session['user_email'] = user.email
             print(user.email)
             return render(request, 'verify_otp.html', {'username': username, 'email': user.email})
 
+
         else:
             # Handle incorrect credentials
             pass
-
+        
     return render(request, 'login.html')
 
 def verify_otp(request):
@@ -258,7 +266,13 @@ def verify_otp(request):
                     del request.session['otp']
                     del request.session['otp_timestamp']
                     del request.session['user_email']
-                    return redirect('home')
+                    next_url = request.session.get('next_url')
+                    print(next_url)
+                    if next_url:
+                        del request.session['next_url']  # Remove 'next_url' from session
+                        return redirect(next_url)
+                    else:
+                        return redirect('/') 
                 except User.DoesNotExist:
                     messages.error(request, 'User with provided email not found')
         else:
@@ -290,3 +304,12 @@ def send_otp_to_email(email, otp):
     recipient_list = [email]
     send_mail(subject, message, from_email, recipient_list)
 
+#error handlers
+def custom_404_view(request, exception):
+    return render(request, 'error_template/404.html', status=404)
+
+def custom_500_view(request):
+    return render(request, 'error_template/500.html', status=500)
+
+def permission_denied_view(request, exception):
+    return render(request, 'error/403.html', status=403)

@@ -45,7 +45,7 @@
                 <li>
                     <strong>{{ experience.position }}</strong> at {{ experience.company }}<br>
                     {{ experience.start_date }} - {{ experience.end_date|default:"Present" }}<br>
-                    {{ experience.workdone }}
+                    {{ experience.work_done }}
                 </li>
             {% endfor %}
         </ul>
@@ -58,7 +58,7 @@
             {% for item in profile.education.all %}
                 <li>
                     <strong>{{ item.program}}</strong> at {{ item.school_or_university }}<br>
-                    {{ item.grade }}<br>
+                   Grade: {{ item.grade }}<br>
                     {{ item.year_started }} - {{ item.year_started }}
                 </li>
             {% endfor %}
