@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@v2
+      with:
+        server: ${{ secrets.SERVER }}
+        local: '/home/kanye/workspace/project_django/myportfolio'
+        remote: '/home/myportfolio/myportfolio'
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        args: '-o StrictHostKeyChecking=no'
+
+    - name: Debug
+      run: echo "Debugging info"
+        
