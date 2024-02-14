@@ -34,3 +34,7 @@ jobs:
         remote: '/home/myportfolio/myportfolio'
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         args: '-o StrictHostKeyChecking=no'
+
+    - name: Debug
+      run: echo "Debugging info"
+      
