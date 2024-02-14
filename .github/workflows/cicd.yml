@@ -29,8 +29,8 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           REMOTE_HOST: ${{ secrets.SERVER}}
           REMOTE_USER: myportfolio
-          SOURCE: '/home/kanye/workspace/project_django/myportfolio'
-          TARGET: '/home/myportfolio/myportfolio'
+          SOURCE: '/home/kanye/workspace/project_django/myportfolio/'
+          TARGET: '/home/myportfolio/myportfolio/'
           ARGS: '-o StrictHostKeyChecking=no'
  
       - name: Debug
