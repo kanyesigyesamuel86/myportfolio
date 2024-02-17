@@ -24,15 +24,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2
-        with:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          REMOTE_HOST: ${{ secrets.SERVER}}
-          REMOTE_USER: myportfolio
-          SOURCE: '/home/kanye/workspace/project_django/myportfolio/'
-          TARGET: '/home/myportfolio/myportfolio/'
-          ARGS: '-o StrictHostKeyChecking=no'
- 
+        run: |
+          rsync -e "ssh -i /home/myportfolio/.ssh/id_ed25519 -o StrictHostKeyChecking=no" -avz /home/kanye/workspace/project_django/myportfolio/ myportfolio@${{ secrets.SERVER}}:/home/myportfolio/myportfolio/
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        
       - name: Debug
         run: |
           echo "Debugging info"
