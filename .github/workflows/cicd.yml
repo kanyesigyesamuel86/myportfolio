@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          rsync -e "ssh -i /home/myportfolio/.ssh/id_ed25519 -o StrictHostKeyChecking=no" -avz /home/kanye/workspace/project_django/myportfolio/ myportfolio@${{ secrets.SERVER}}:/home/myportfolio/myportfolio/
+          rsync -e "ssh -i /home/kanye/Downloads/myportfolio_key.pem -o StrictHostKeyChecking=no" -avz /home/kanye/workspace/project_django/myportfolio/ myportfolio@${{ secrets.SERVER}}:/home/myportfolio/myportfolio/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         
