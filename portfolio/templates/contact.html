@@ -4,7 +4,7 @@
 
   <form method="post" action="{% url 'contact' %}">
     <h2>Send a Message</h2> 
-    <p>Any info! I will be glad to hear from you.</p> <br>
+    <p>Any info? <br> I will be glad to hear from you.</p> <br>
     {% csrf_token %}
     <label for="username">Email:</label>
     <input type="email" name="email" required>
