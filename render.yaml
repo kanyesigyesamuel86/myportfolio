@@ -1,0 +1,22 @@
+databases:
+  - name: myportfoliodb
+    plan: free
+    databaseName: myportfolio
+    user: myportfolio
+
+services:
+  - type: web
+    plan: free
+    name: myportfolio
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn myportfolio.asgi:application -k uvicorn.workers.UvicornWorker"    
+envVars:
+  - key: DATABASE_URL
+    fromDatabase:
+      name: myportfoliodb
+      property: connectionString
+  - key: SECRET_KEY
+    generateValue: true
+  - key: WEB_CONCURRENCY
+    value: 4
